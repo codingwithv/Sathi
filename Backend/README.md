@@ -184,3 +184,108 @@ After successful login, use the returned token in subsequent requests:
 ```
 Authorization: Bearer <token>
 ```
+
+## Get User Profile
+
+### Endpoint
+
+```
+GET /users/profile
+```
+
+### Description
+
+Retrieve the authenticated user's profile information.
+
+### Authentication Required
+
+Yes. Send token in Authorization header:
+
+```
+Authorization: Bearer <token>
+```
+
+### Responses
+
+#### Success Response
+
+**Code:** 200 OK
+
+```json
+{
+  "_id": "60d3b41ef3f4d52b9c43a123",
+  "fullname": {
+    "firstname": "John",
+    "lastname": "Doe"
+  },
+  "email": "john.doe@example.com"
+}
+```
+
+#### Error Responses
+
+**Code:** 401 UNAUTHORIZED
+
+```json
+{
+  "message": "Authentication required"
+}
+```
+
+**Code:** 500 INTERNAL SERVER ERROR
+
+```json
+{
+  "message": "Internal server error"
+}
+```
+
+## User Logout
+
+### Endpoint
+
+```
+GET /users/logout
+```
+
+### Description
+
+Logout the currently authenticated user. This will invalidate the current token and clear the session cookie.
+
+### Authentication Required
+
+Yes. Send token in Authorization header:
+
+```
+Authorization: Bearer <token>
+```
+
+### Responses
+
+#### Success Response
+
+**Code:** 200 OK
+
+```json
+{
+  "message": "Logged out successfully"
+}
+```
+
+#### Error Responses
+
+**Code:** 401 UNAUTHORIZED
+
+```json
+{
+  "message": "Authentication required"
+}
+```
+
+**Code:** 500 INTERNAL SERVER ERROR
+
+```json
+{
+  "message": "Internal server error"
+}
+```
