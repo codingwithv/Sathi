@@ -92,3 +92,95 @@ After successful registration, use the returned token in subsequent requests:
 ```
 Authorization: Bearer <token>
 ```
+
+## User Login
+
+### Endpoint
+
+```
+POST /users/login
+```
+
+### Description
+
+Authenticate a user and receive an authentication token.
+
+### Request Body
+
+| Field    | Type   | Description          | Validation                 |
+| -------- | ------ | -------------------- | -------------------------- |
+| email    | string | User's email address | Must be valid email format |
+| password | string | User's password      | Min 6 characters           |
+
+### Example Request
+
+```json
+{
+  "email": "john.doe@example.com",
+  "password": "securepass123"
+}
+```
+
+### Responses
+
+#### Success Response
+
+**Code:** 200 OK
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIs...",
+  "user": {
+    "_id": "60d3b41ef3f4d52b9c43a123",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john.doe@example.com"
+  }
+}
+```
+
+#### Error Responses
+
+**Code:** 400 BAD REQUEST
+
+```json
+{
+  "errors": [
+    {
+      "msg": "Email is not valid",
+      "param": "email"
+    }
+  ]
+}
+```
+
+**Code:** 401 UNAUTHORIZED
+
+```json
+{
+  "message": "Invalid credentials"
+}
+```
+
+**Code:** 500 INTERNAL SERVER ERROR
+
+```json
+{
+  "message": "Internal server error"
+}
+```
+
+### Field Validations
+
+- **Email**: Must be a valid email format
+- **Password**: Minimum 6 characters
+
+### Authentication
+
+After successful login, use the returned token in subsequent requests:
+
+```
+Authorization: Bearer <token>
+```
